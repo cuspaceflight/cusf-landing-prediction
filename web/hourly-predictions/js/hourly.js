@@ -59,7 +59,7 @@ function show_prediction(uuid, launch_time, landing_time) {
                         position: max_point,
                         map: g_map_object,
                         icon: pop_icon,
-                        title: 'Baloon burst (max. altitude: ' + max_height + 'm)',
+                        title: 'Burst (altitude: ' + max_height + 'm)',
                 });
 
                 google.maps.event.addListener(path_polyline, 'click', function() { 

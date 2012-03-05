@@ -92,7 +92,7 @@ function hide_prediction(uuid) {
         var prediction = g_predictions[uuid];
         if(prediction == null) { return; }
 
-        g_predictions[prediction.uuid] = null;
+        g_predictions[uuid] = null;
 
         prediction.polyline.setMap( null );
         prediction.pop_marker.setMap( null );

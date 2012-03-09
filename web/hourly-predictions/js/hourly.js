@@ -156,7 +156,7 @@ function populate_map() {
                                  position: latlng,
                                  map: g_map_object,
                                  icon: marker_image,
-                                 title: launch_time.format('%a %d/%b/%Y %H:%M:%S'),
+                                 title: launch_time.format('%a %d/%b/%Y %H:%M:%S')
                         });
                         prediction_coords.push(latlng);
 
@@ -177,7 +177,7 @@ function populate_map() {
 
                         g_prediction_map_objects[prediction.uuid] = {
                                 'info_window': info_window,
-                                'marker': marker,
+                                'marker': marker
                         };
                 });
 
@@ -186,7 +186,7 @@ function populate_map() {
                         path: prediction_coords,
                         strokeColor: '#333',
                         strokeOpacity: 0.5,
-                        strokeWeight: 2,
+                        strokeWeight: 2
                 });
                 pred_path.setMap(g_map_object);
  

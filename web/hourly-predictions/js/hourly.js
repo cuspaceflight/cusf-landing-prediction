@@ -46,7 +46,7 @@ function show_prediction(uuid, launch_time, landing_time) {
                         path: path,
                         strokeColor: '#000000',
                         strokeWeight: 3,
-                        strokeOpacity: 0.75,
+                        strokeOpacity: 0.75
                 });
                 path_polyline.setMap(g_map_object);
 
@@ -59,7 +59,7 @@ function show_prediction(uuid, launch_time, landing_time) {
                         position: max_point,
                         map: g_map_object,
                         icon: pop_icon,
-                        title: 'Burst (altitude: ' + max_height + 'm)',
+                        title: 'Burst (altitude: ' + max_height + 'm)'
                 });
 
                 google.maps.event.addListener(path_polyline, 'click', function() { 
@@ -184,7 +184,7 @@ function populate_map() {
                 // Plot a path for the predictions
                 var pred_path = new google.maps.Polyline({
                         path: prediction_coords,
-                        strokeColor: '#ff4444',
+                        strokeColor: '#cccccc',
                         strokeOpacity: 0.5,
                         strokeWeight: 2,
                 });

@@ -106,7 +106,7 @@ def main():
 
     log.info('Looking for latest dataset which covers %s' % time_to_find.ctime())
     try:
-        dataset = dataset_for_time(time_to_find)
+        (dataset, model) = dataset_for_time(time_to_find)
     except: 
         print('Could not locate a dataset for the requested time.')
         sys.exit(1)
@@ -129,7 +129,7 @@ def main():
                 options.lat + dlat*options.latdelta*2, options.latdelta, \
                 options.lon + dlon*options.londelta*2, options.londelta)
 
-            write_file(options.output, dataset, \
+            write_file(options.output, dataset, model, \
                 window, \
                 time_to_find - datetime.timedelta(hours=options.past), \
                 time_to_find + datetime.timedelta(hours=options.future))
@@ -150,7 +150,7 @@ def purge_cache():
         log.debug('   Deleting %s.' % file)
         os.remove(pydap.lib.CACHE + file)
 
-def write_file(output_format, data, window, mintime, maxtime):
+def write_file(output_format, data, model, window, mintime, maxtime):
     log.info('Downloading data in window (lat, lon) = (%s +/- %s, %s +/- %s).' % window)
 
     # Firstly, get the hgtprs variable to extract the times we're going to use.
@@ -243,8 +243,10 @@ def write_file(output_format, data, window, mintime, maxtime):
         output = open(output_filename, 'w')
 
         # Write the header.
-        output.write('# window centre latitude, window latitude radius, window centre longitude, window longitude radius, POSIX timestamp\n')
-        header = window + (timestamp,)
+        output.write('# window centre latitude, window latitude radius, window
+                centre longitude, window longitude radius, POSIX timestamp,
+                model date, model time\n')
+        header = window + (timestamp, model["date"], model["time"])
         output.write(','.join(map(str,header)) + '\n')
 
         # Write the axis count.
@@ -372,13 +374,14 @@ def dataset_for_time(time):
         try:
             log.debug('Trying dataset at %s.' % url)
             dataset = pydap.client.open_url(url)
+            model = {"date": url.split("/")[5], "time": url.split("/")[6]}
 
             start_time = timestamp_to_datetime(dataset.time[0])
             end_time = timestamp_to_datetime(dataset.time[-1])
 
             if start_time <= time and end_time >= time:
                 log.info('Found good dataset at %s.' % url)
-                return dataset
+                return (dataset, model)
         except pydap.exceptions.ServerError:
             # Skip server error.
             pass

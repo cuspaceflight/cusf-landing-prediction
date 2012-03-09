@@ -210,10 +210,8 @@ def main():
                 manifest['predictions'][uuid] = entry
                 open(manifest_filename, 'w').write(demjson.encode(manifest))
 
-                logging.info('Prediction finished. Sleeping to save CPU...')
+                logging.info('Prediction finished.')
                 
-                # Sleep so we don't use massive amounts of CPU
-                # time.sleep(2)
             except Exception:
                 traceback.print_exc()
 

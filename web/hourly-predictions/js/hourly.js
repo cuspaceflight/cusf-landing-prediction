@@ -119,11 +119,6 @@ var g_prediction_map_objects = [];
 function populate_map() {
         $.getJSON('data/manifest.json', null, 
         function(data) { 
-                var marker_image = new google.maps.MarkerImage('images/marker-sm-red.png',
-                        new google.maps.Size(11,11),
-                        new google.maps.Point(0,0), // origin
-                        new google.maps.Point(5.5,5.5)); // anchor
-
                 // extract the predictions to an array of uuid, entry pairs
                 var predictions = [];
                 $.each(data['predictions'], function(uuid, entry) { 
@@ -146,8 +141,15 @@ function populate_map() {
                         var where = prediction.entry['landing-location'];
                         var launch_time = prediction_entry_convert_date(prediction.entry['launch-time']);
                         var landing_time = prediction_entry_convert_date(prediction.entry['landing-time']);
+                        var hour = launch_time.format('%H');
+                        if( hour > 11 ) hour -= 12;
+                        
                         var latlng = new google.maps.LatLng(
                                  where.latitude, where.longitude);
+                        var marker_image = new google.maps.MarkerImage('images/marker' + hour,
+                                new google.maps.Size(11,11),
+                                new google.maps.Point(0,0), // origin
+                                new google.maps.Point(5.5,5.5)); // anchor
                         var marker = new google.maps.Marker({
                                  position: latlng,
                                  map: g_map_object,

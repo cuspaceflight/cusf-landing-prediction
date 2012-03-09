@@ -184,7 +184,7 @@ function populate_map() {
                 // Plot a path for the predictions
                 var pred_path = new google.maps.Polyline({
                         path: prediction_coords,
-                        strokeColor: '#333',
+                        strokeColor: '#f44',
                         strokeOpacity: 0.5,
                         strokeWeight: 2
                 });

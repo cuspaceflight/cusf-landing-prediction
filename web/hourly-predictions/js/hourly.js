@@ -141,7 +141,9 @@ function populate_map() {
                         var where = prediction.entry['landing-location'];
                         var launch_time = prediction_entry_convert_date(prediction.entry['launch-time']);
                         var landing_time = prediction_entry_convert_date(prediction.entry['landing-time']);
-                        var hour = launch_time.format('%h');
+
+                        // Derive the index for the greyscale marker image
+                        var hour = launch_time.getHours();
                         if( hour > 11 ) hour -= (2*(hour - 12) + 1);
                         
                         var latlng = new google.maps.LatLng(

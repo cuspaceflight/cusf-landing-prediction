@@ -1,6 +1,6 @@
 var g_map_object = null;
-function init_map(lat, lon) {
-        var latlng = new google.maps.LatLng(lat, lon);
+function init_map() {
+        var latlng = new google.maps.LatLng(52, 0);
         var options = {
                 zoom: 8,
                 center: latlng,
@@ -200,6 +200,11 @@ function populate_map() {
                 var model = data['model'];
                 $('#model-date').text(model['date']);
                 $('#model-time').text(model['time']);
+
+                // Pan the map to the scenario centre
+                var map_centre = new google.maps.LatLng(template['launch-site'].latitude, 
+                        template['launch-site'].longitude);
+                g_map_object.panTo(map_centre);
         }
         );
 }
@@ -234,12 +239,8 @@ function POSIXtoDate(timestamp)
 }
 
 $(document).ready(function() {
-        $.getJSON("scenario-template.json", function(data)
-        {
-                init_map(data["launch-site"].latitude, 
-                        data["launch-site"].longitude);
-                populate_map();
-        });
+        init_map();
+        populate_map();
 });
 
 // vim:et:ts=8:sw=8:autoindent

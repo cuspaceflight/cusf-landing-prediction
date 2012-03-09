@@ -347,7 +347,7 @@ def possible_urls(time):
     earliest = time - period
     latest = time
 
-    url_format = 'http://nomads.ncep.noaa.gov:9090/dods/gfs_hd/gfs_hd%i%02i%02i/gfs_hd_%02iz'
+    url_format = 'http://nomads.ncep.noaa.gov:9090/dods/gfs/gfs%i%02i%02i/gfs_%02iz'
 
     # Start from the latest, work to the earliest
     proposed = latest

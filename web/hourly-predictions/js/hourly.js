@@ -4,7 +4,7 @@ function init_map(lat, lon) {
         var options = {
                 zoom: 8,
                 center: latlng,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
+                mapTypeId: google.maps.MapTypeId.TERRAIN
         };
         var map = new google.maps.Map(document.getElementById('map_canvas'), options)
         g_map_object = map;

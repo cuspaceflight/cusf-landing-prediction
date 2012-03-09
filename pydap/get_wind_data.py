@@ -243,9 +243,9 @@ def write_file(output_format, data, model, window, mintime, maxtime):
         output = open(output_filename, 'w')
 
         # Write the header.
-        output.write('# window centre latitude, window latitude radius, window \
-                centre longitude, window longitude radius, POSIX timestamp, \
-                model date, model time\n')
+        output.write('# window centre latitude, window latitude radius, ' + \
+                'window centre longitude, window longitude radius, ' + \
+                'POSIX timestamp, model date, model time\n')
         header = window + (timestamp, model["date"], model["time"])
         output.write(','.join(map(str,header)) + '\n')
 

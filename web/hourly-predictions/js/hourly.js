@@ -193,6 +193,9 @@ function populate_map() {
                 $('#ascent-rate').text(template['altitude-model']['ascent-rate']);
                 $('#descent-rate').text(template['altitude-model']['descent-rate']);
                 $('#burst-alt').text(template['altitude-model']['burst-altitude']);
+                var model = data['model'];
+                $('#model-date').text(model['date']);
+                $('#model-time').text(model['time']);
         }
         );
 }

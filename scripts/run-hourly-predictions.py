@@ -163,16 +163,20 @@ def get_latest_timestamp():
     logging.info('Scanning data directory %s' % config.LAND_PRED_DATA)
     data_files = glob.glob(os.path.join(config.LAND_PRED_DATA, '*.dat'))
     timestamps = []
+    models = []
     for filename in data_files:
         logging.debug('  - found file: %s' % filename)
         file = open(filename, 'r')
         header = next_non_comment_line(file).strip().split(',')
         timestamps.append(int(header[4]))
-    return max(timestamps)
+        models.append({ "date": header[5], "time": header[6] })
+    timestamp = max(timestamps)
+    model = models[timestamps.index(timestamp)]
+    return (timestamp, model) 
 
 def main():
     start_stamp = int(time.time())
-    end_stamp = get_latest_timestamp()
+    (end_stamp, model) = get_latest_timestamp()
 
     start_time = datetime.datetime.utcfromtimestamp(start_stamp)
     end_time = datetime.datetime.utcfromtimestamp(end_stamp)
@@ -198,6 +202,7 @@ def main():
     manifest = {}
 
     manifest['scenario-template'] = demjson.decode(scenario_template)
+    manifest['model'] = model
     manifest['predictions'] = { }
 
     while predict_time < end_time:

@@ -146,7 +146,7 @@ function populate_map() {
                         
                         var latlng = new google.maps.LatLng(
                                  where.latitude, where.longitude);
-                        var marker_image = new google.maps.MarkerImage('images/marker' + hour,
+                        var marker_image = new google.maps.MarkerImage('images/marker' + hour + ".png",
                                 new google.maps.Size(11,11),
                                 new google.maps.Point(0,0), // origin
                                 new google.maps.Point(5.5,5.5)); // anchor

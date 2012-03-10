@@ -42,6 +42,13 @@ function show_prediction(uuid, launch_time, landing_time) {
                         }
                 });
 
+                // Get launch and landing LatLngs
+                var launch_pt = new google.maps.LatLng(lines[0].split(',')[1],
+                        lines[0].split(',')[2]);
+                var land_pt = new google.maps.LatLng(lines[lines.length].split(',')[1], 
+                        lines[lines.length].split(',')[2]);
+
+                // Construct a polyline for the flight path
                 var path_polyline = new google.maps.Polyline({
                         path: path,
                         strokeColor: '#000000',
@@ -77,6 +84,7 @@ function show_prediction(uuid, launch_time, landing_time) {
                 '<td>' + launch_time.format('%a %d/%b/%Y') + '</td>' +
                 '<td>' + launch_time.format('%H:%M:%S') + '</td>' +
                 '<td>' + ((landing_time - launch_time) / (1000*60*60)).toPrecision(3) + ' hrs</td>' +
+                '<td>' + distHaversine(launch_pt, land_pt, 1) + ' km</td>' +
                 '<td>' + 
                         '<a href="#" onclick="hide_prediction(\''+uuid+'\')">hide</a>&nbsp;' +
                         '<a href="#" onclick="show_info(\''+uuid+'\')">info</a>' +
@@ -236,6 +244,26 @@ function POSIXtoDate(timestamp)
         var d = new Date();
         d.setTime(timestamp * 1000);
         return d.format('%d/%b/%Y %H:%M:%S')
+}
+
+/**
+ * The Haversine formula to calculate the distance across the surface between
+ * two points on the Earth
+ */
+distHaversine = function(p1, p2, precision) {
+  var R = 6371; // earth's mean radius in km
+  var dLat  = rad(p2.lat() - p1.lat());
+  var dLong = rad(p2.lng() - p1.lng());
+
+  var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+          Math.cos(rad(p1.lat())) * Math.cos(rad(p2.lat())) * Math.sin(dLong/2) * Math.sin(dLong/2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  var d = R * c;
+  if ( precision == null ) {
+      return d.toFixed(3);
+  } else {
+      return d.toFixed(precision);
+  }
 }
 
 $(document).ready(function() {

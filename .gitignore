@@ -15,3 +15,4 @@ new
 logs
 CMakeFiles
 *.pyc
+web/hourly-predictions/scenario-template.json

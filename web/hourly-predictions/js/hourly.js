@@ -266,6 +266,8 @@ distHaversine = function(p1, p2, precision) {
   }
 }
 
+rad = function(x) {return x*Math.PI/180;}
+
 $(document).ready(function() {
         init_map();
         populate_map();

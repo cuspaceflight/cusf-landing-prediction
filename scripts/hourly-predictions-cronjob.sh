@@ -5,16 +5,16 @@
 # Original version by: Rich Wareham <rjw57@cam.ac.uk>
 
 # The root where the various utilities are based.
-ROOT=/societies/cuspaceflight/
+ROOT=/opt
 
 # The script itself
-HOURLYSCRIPT=${ROOT}/git/cusf-landing-prediction/scripts/run-hourly-predictions.py
+HOURLYSCRIPT=${ROOT}/cusf-landing-prediction/scripts/run-hourly-predictions.py
 
 # Where to run the script
-WORKINGDIR=${ROOT}/git/cusf-landing-prediction/scripts/
+WORKINGDIR=${ROOT}/cusf-landing-prediction/scripts/
 
 # Output
-OUTPUTDIR=${ROOT}/public_html/hourly-predictions/
+OUTPUTDIR=${ROOT}/cusf-landing-prediction/web/hourly-predictions/
 if [ ! -d ${OUTPUTDIR} ]; then
 	echo "$0: The directory ${OUTPUTDIR} needs to exist and be writable."
 	exit 1

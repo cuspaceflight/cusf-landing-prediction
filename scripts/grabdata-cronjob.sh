@@ -6,11 +6,11 @@
 
 # The root where the various utilities are based.
 if [ "${ROOT}x" == "x" ]; then
-	ROOT=/societies/cuspaceflight/
+	ROOT=/opt
 fi
 
 # The get data script itself
-GETDATA=${ROOT}/git/cusf-landing-prediction/pydap/get_wind_data.py
+GETDATA=${ROOT}/cusf-landing-prediction/pydap/get_wind_data.py
 
 # Where to run the script
 WORKINGDIR=${ROOT}/landing-prediction-data/

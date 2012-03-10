@@ -43,10 +43,10 @@ function show_prediction(uuid, launch_time, landing_time) {
                 });
 
                 // Get launch and landing LatLngs
-                var launch_pt = new google.maps.LatLng(lines[0].split(',')[1],
-                        lines[0].split(',')[2]);
-                var land_pt = new google.maps.LatLng(lines[lines.length].split(',')[1], 
-                        lines[lines.length].split(',')[2]);
+                var launch_pt = new google.maps.LatLng(parseFloat(lines[0].split(',')[1]),
+                        parseFloat(lines[0].split(',')[2]));
+                var land_pt = new google.maps.LatLng(parseFloat(lines[lines.length - 1].split(',')[1]), 
+                        parseFloat(lines[lines.length - 1].split(',')[2]));
 
                 // Construct a polyline for the flight path
                 var path_polyline = new google.maps.Polyline({

@@ -30,6 +30,7 @@ function show_prediction(uuid, launch_time, landing_time) {
                 var path = [ ];
                 var max_height = -10;
                 var max_point = null;
+                var idx_final = 0;
                 $.each(lines, function(idx, line) {
                         entry = line.split(',');
                         if(entry.length >= 4) {
@@ -39,14 +40,15 @@ function show_prediction(uuid, launch_time, landing_time) {
                                         max_point = point;
                                 }
                                 path.push(point);
+                                idx_final = idx;
                         }
                 });
 
                 // Get launch and landing LatLngs
                 var launch_pt = new google.maps.LatLng(parseFloat(lines[0].split(',')[1]),
                         parseFloat(lines[0].split(',')[2]));
-                var land_pt = new google.maps.LatLng(parseFloat(lines[lines.length - 1].split(',')[1]), 
-                        parseFloat(lines[lines.length - 1].split(',')[2]));
+                var land_pt = new google.maps.LatLng(parseFloat(lines[idx_final].split(',')[1]), 
+                        parseFloat(lines[idx_final].split(',')[2]));
 
                 // Construct a polyline for the flight path
                 var path_polyline = new google.maps.Polyline({

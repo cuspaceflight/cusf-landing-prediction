@@ -149,7 +149,9 @@ function populate_map() {
                 $.each(predictions, function(idx, prediction) {
                         // console.log(prediction);
                         var where = prediction.entry['landing-location'];
+                        console.log("Pre converted is " + launch_time)
                         var launch_time = prediction_entry_convert_date(prediction.entry['launch-time']);
+                        console.log("Post converted is " + launch_time)
                         var landing_time = prediction_entry_convert_date(prediction.entry['landing-time']);
 
                         // Derive the index for the greyscale marker image

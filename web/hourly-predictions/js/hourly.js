@@ -13,8 +13,7 @@ function init_map() {
 function prediction_entry_convert_date(when) {
         var time = new Date();
         time.setUTCFullYear(when.year);
-        time.setUTCMonth(when.month - 1);
-        time.setUTCDate(when.day);
+        time.setUTCMonth(when.month - 1, when.day);
         time.setUTCHours(when.hour);
         time.setUTCMinutes(when.minute);
         time.setUTCSeconds(when.second);
